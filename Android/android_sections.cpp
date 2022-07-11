@@ -33,9 +33,6 @@ int kern_static::base_ksymtab_strings()
     // grab the base that i need
     SAFE_BAIL(check_sect("__param", &paramSec) == -1);
 
-#ifdef LIVE_KERNEL
-#else
-#endif
     if (live_kernel == true)
     {
         live_kern_addr(paramSec->sh_offset - ksymstrAssumeSize, ksymstrAssumeSize, &ksymstrBuf);
