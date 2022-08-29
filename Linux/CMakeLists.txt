@@ -1,7 +1,7 @@
 project(${CMAKE_SYSTEM_NAME}_dyn_offset VERSION 0.1.0)
 
 set(SOURCES_LIST
-    ${CMAKE_SYSTEM_NAME}/${CMAKE_SYSTEM_NAME}_dyn_offset.cpp)
+    ${CMAKE_SYSTEM_NAME}_dyn_offset.cpp)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES_LIST})
 
