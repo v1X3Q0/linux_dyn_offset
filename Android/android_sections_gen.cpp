@@ -8,6 +8,7 @@
 #include <kernel_block.h>
 #include <kern_img.h>
 #include <kern_static.h>
+#include <kern_dynamic.h>
 
 int grab_sinittext(kern_static* kernel_local_target)
 {

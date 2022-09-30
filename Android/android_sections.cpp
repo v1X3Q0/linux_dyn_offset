@@ -9,7 +9,7 @@
 #include <kern_img.h>
 #include <kern_static.h>
 
-int kern_static::base_ksymtab_strings()
+int base_ksymtab_strings(kern_static* kernel_local_target)
 {
     int result = -1;
     const char* curStr = 0;
@@ -81,7 +81,7 @@ fail:
     return result;
 }
 
-int kern_static::base_kcrctab()
+int base_kcrctab(kern_static* kernel_local_target)
 {
     int result = -1;
     size_t crcCount = 0;
@@ -118,7 +118,7 @@ fail:
     return result;
 }
 
-int kern_static::base_ex_table()
+int base_ex_table(kern_static* kernel_local_target)
 {
     int result = -1;
     void** modverIter = 0;
@@ -150,7 +150,7 @@ fail:
     return result;
 }
 
-int kern_static::base_modver()
+int base_modver(kern_static* kernel_local_target)
 {
     int result = -1;
     kernel_param* paramIter = 0;
@@ -229,7 +229,7 @@ fail:
 }
 
 // since don't have start_kernel, probably not gonna work for static either.
-int kern_static::base_init_data()
+int base_init_data(kern_static* kernel_local_target)
 {
     int result = -1;
     instSet getB;
