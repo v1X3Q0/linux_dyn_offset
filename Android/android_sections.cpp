@@ -56,7 +56,7 @@ int base_ksymtab_strings(kern_static* kernel_local_target)
         {
             goto finish_eval;
         }
-        offsetTmp = rstrnlen(curStr, DEFAULT_SEARCH_SIZE);
+        offsetTmp = rstrnlenu(curStr, DEFAULT_SEARCH_SIZE);
         SAFE_BAIL(offsetTmp == -1);
         // you're at the last non null character, subtract the offset to get to the next
         // null character. add 1 so that you're string begins at the next non null character.
@@ -78,43 +78,6 @@ finish:
     result = 0;
 fail:
     SAFE_FREE(ksymstrBuf);
-    return result;
-}
-
-int base_kcrctab(kern_static* kernel_local_target)
-{
-    int result = -1;
-    size_t crcCount = 0;
-    uint32_t* crcIter = 0;
-    Elf64_Shdr* ksymtabStr = 0;
-
-    // check if kcrc already exists
-    FINISH_IF(check_sect("__kcrctab", NULL) == 0);
-
-    // grab the base that i need
-    SAFE_BAIL(check_sect("__ksymtab_strings", &ksymtabStr) == -1);
-
-    crcIter = (uint32_t*)(UNRESOLVE_REL(ksymtabStr->sh_offset) - sizeof(uint32_t));
-
-    while (true)
-    {
-        if (*crcIter == *(crcIter - 2))
-        {
-            goto finish_eval;
-        }
-        crcCount++;
-        crcIter--;
-    }
-    goto fail;
-
-finish_eval:
-    crcIter++;
-    insert_section("__kcrctab", (size_t)crcIter, 0);
-    find_sect("__kcrctab")->sh_size = UNRESOLVE_REL(find_sect("__ksymtab_strings")->sh_offset) - (size_t)crcIter;
-    ksyms_count = crcCount;
-finish:
-    result = 0;
-fail:
     return result;
 }
 

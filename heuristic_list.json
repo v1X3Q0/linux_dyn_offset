@@ -1,0 +1,100 @@
+{
+    "base_init_text": {
+        "Debian": {
+            "10": [
+                "4.19"
+            ]
+        },
+        "depends": [
+            ".head.text"
+        ],
+        "resolves": [
+            ".init.text"
+        ]
+    },
+    "grab_sinittext": {
+        "sargo": {
+            "11": [
+                "4.4"
+            ]
+        },
+        "depends": [],
+        "resolves": [
+            "_sinittext"
+        ]
+    },
+    "base_inits": {
+        "Debian": {
+            "10": [
+                "4.19"
+            ]
+        },
+        "sargo": {
+            "11": [
+                "4.4"
+            ]
+        },
+        "depends": [
+            ".init.text"
+        ],
+        "resolves": [
+            ".head.text",
+            ".text"
+        ]
+    },
+    "base_ksymtab_strings_brute": {
+        "Debian": {
+            "10": [
+                "4.19"
+            ]
+        },
+        "sargo": {
+            "11": [
+                "4.4"
+            ]
+        },
+        "depends": [
+            ".init.text",
+            ".text"
+        ],
+        "resolves": [
+            "__ksymtab_strings"
+        ]
+    },
+    "base_kcrctab": {
+        "Debian": {
+            "10": [
+                "4.19"
+            ]
+        },
+        "sargo": {
+            "11": [
+                "4.4"
+            ]
+        },
+        "depends": [
+            "__ksymtab_strings"
+        ],
+        "resolves": [
+            "__kcrctab"
+        ]
+    },
+    "base_ksymtab": {
+        "Debian": {
+            "10": [
+                "4.19"
+            ]
+        },
+        "sargo": {
+            "11": [
+                "4.4"
+            ]
+        },
+        "depends": [
+            "__kcrctab"
+        ],
+        "resolves": [
+            "__ksymtab"
+        ]
+    }
+}
