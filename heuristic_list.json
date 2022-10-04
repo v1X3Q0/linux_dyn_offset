@@ -96,5 +96,25 @@
         "resolves": [
             "__ksymtab"
         ]
+    },
+    "base_gpl_brute": {
+        "Debian": {
+            "10": [
+                "4.19"
+            ]
+        },
+        "sargo": {
+            "11": [
+                "4.4"
+            ]
+        },
+        "depends": [
+            "__ksymtab",
+            ".text"
+        ],
+        "resolves": [
+            "__ksymtab_gpl",
+            "__kcrctab_gpl"
+        ]
     }
 }

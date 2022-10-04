@@ -468,3 +468,52 @@ fail:
     return result;
 }
 
+int base_gpl_brute(kernel_linux* kernel_local_target)
+{
+#define KSYMTAB_INDEX 0
+#define KSYMGPL_INDEX 1
+#define KCRCTAB_INDEX 2
+
+    int result = -1;
+    named_kmap_t* ksymtab_map = 0;
+    named_kmap_t* text_map = 0;
+    binary_ss* ksymtab_search = 0;
+    symsearch* tmpSymSearch = 0;
+
+    size_t ksymtab_base = 0;
+    size_t ksymtab_gpl_base = 0;
+    size_t kcrctab_base = 0;
+    size_t kcrctab_gpl_base = 0;
+    size_t ksymtab_strings_base = 0;
+
+    FINISH_IF(
+        (kernel_local_target->check_kmap("__ksymtab_gpl", NULL) == 0) &&
+        (kernel_local_target->check_kmap("__kcrctab_gpl", NULL) == 0)
+    );
+
+    SAFE_BAIL(
+        (kernel_local_target->check_kmap(".text", &text_map) == -1) ||
+        (kernel_local_target->check_kmap("__ksymtab", &ksymtab_map) == -1)
+        );
+
+    ksymtab_search = new binary_ss((uint8_t *)&(ksymtab_map->kva), sizeof(size_t), 0, 1, true);
+
+    SAFE_BAIL(ksymtab_search->findPattern(text_map->kmap_stats.alloc_base, text_map->kmap_stats.alloc_size, (void**)&tmpSymSearch) == -1);
+
+    ksymtab_base = (size_t)tmpSymSearch[KSYMTAB_INDEX].start;
+    ksymtab_gpl_base = (size_t)tmpSymSearch[KSYMGPL_INDEX].start;
+    kcrctab_base = (size_t)tmpSymSearch[KCRCTAB_INDEX].start;
+    kcrctab_gpl_base = (size_t)tmpSymSearch[KSYMGPL_INDEX].crcs;
+    ksymtab_strings_base = (size_t)tmpSymSearch[KCRCTAB_INDEX].crcs;
+
+    kernel_local_target->kern_sym_insert("modtable_base", ((size_t)tmpSymSearch - (size_t)text_map->kmap_stats.alloc_base) + text_map->kva);
+
+    kernel_local_target->insert_section("__ksymtab_gpl", ksymtab_gpl_base, kcrctab_base - ksymtab_gpl_base);
+    kernel_local_target->insert_section("__kcrctab_gpl", kcrctab_gpl_base, ksymtab_strings_base - kcrctab_gpl_base);
+
+finish:
+    result = 0;
+fail:
+    SAFE_DEL(ksymtab_search);
+    return result;
+}

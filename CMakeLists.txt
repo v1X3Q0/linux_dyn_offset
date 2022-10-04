@@ -25,6 +25,7 @@ list(APPEND INCLUDE_LIST
 
 set(SOURCES_LIST
     common/finddyn.cpp
+    common/kdlsym.cpp
     common/sections.cpp
     common/structs.cpp)
 
