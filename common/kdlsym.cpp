@@ -17,7 +17,7 @@
     #define kernel_symbol_t kernel_symbol
 #endif
 
-int ksym_dlsym_kcrc(kernel_linux* kernel_local_target, const char* newString, size_t* out_address)
+int ksym_dlsym_kcrc(kernel_linux* kernel_local_target, const char* newString, uint64_t* out_address)
 {
     int result = -1;
     const char* kstrBase = 0;

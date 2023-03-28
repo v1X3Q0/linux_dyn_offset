@@ -116,5 +116,31 @@
             "__ksymtab_gpl",
             "__kcrctab_gpl"
         ]
+    },
+    "task_struct_tasks": {
+        "Debian": {
+            "10": [
+                "4.19"
+            ]
+        },
+        "depends": [
+            ".text"
+        ],
+        "resolves": [
+            "task_struct.tasks"
+        ]
+    },
+    "task_struct_comm": {
+        "Debian": {
+            "10": [
+                "4.19"
+            ]
+        },
+        "depends": [
+            ".text"
+        ],
+        "resolves": [
+            "task_struct.comm"
+        ]
     }
 }

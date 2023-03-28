@@ -61,7 +61,7 @@ execute_process(
     COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/generateParse.py ${LINUX_FAMILY} ${RELEASE_VERSION} ${KERNEL_VERSION} ${CMAKE_CURRENT_SOURCE_DIR}/heuristic_list.json ${CMAKE_CURRENT_BINARY_DIR}/finddyn.h
 )
 
-add_library(${PROJECT_NAME} STATIC ${SOURCES_LIST})
+add_library(${PROJECT_NAME} SHARED ${SOURCES_LIST})
 target_compile_definitions(${PROJECT_NAME} PRIVATE ${DYNOFFSET_CFLAGS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_LIST})
