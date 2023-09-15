@@ -3,7 +3,6 @@
 
 #include <localUtil.h>
 #include <bgrep_e.h>
-#include <hdeA64.h>
 #include <ibeSet.h>
 #include <kernel_block.h>
 #include <kern_img.h>
