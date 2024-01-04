@@ -13,11 +13,6 @@ set(INCLUDE_LIST
     ${ANDROID_TOOL_BASE}/linux/rwDrv/include
     ${CMAKE_CURRENT_BINARY_DIR}
     )
-if (ARCH MATCHES "arm64" OR ARCH MATCHES "arm64e" OR ARCH MATCHES "aarch64")
-    list(APPEND INCLUDE_LIST ${ANDROID_TOOL_BASE}/common/hde_armv8)
-elseif(ARCH MATCHES "AMD64" OR ARCH MATCHES "i386" OR ARCH MATCHES "x86_64")
-    list(APPEND INCLUDE_LIST ${ANDROID_TOOL_BASE}/common/hde_x86)
-endif()
 
 # dynamic circumstances, add krw_util
 list(APPEND INCLUDE_LIST
@@ -28,6 +23,20 @@ set(SOURCES_LIST
     common/kdlsym.cpp
     common/sections.cpp
     common/structs.cpp)
+
+if (ARCH MATCHES "arm64" OR ARCH MATCHES "arm64e" OR ARCH MATCHES "aarch64")
+    list(APPEND INCLUDE_LIST ${ANDROID_TOOL_BASE}/common/hde_armv8)
+    set(COMP_DEFS SUPPORT_AARCH64=1)
+    list(APPEND SOURCES_LIST
+        common/arm64/sections_arch.cpp
+        Linux/arm64/Linux_dyn_offset_arch.cpp)
+elseif(ARCH MATCHES "AMD64" OR ARCH MATCHES "i386" OR ARCH MATCHES "x86_64")
+    list(APPEND INCLUDE_LIST ${ANDROID_TOOL_BASE}/common/hde_x86)
+    set(COMP_DEFS SUPPORT_X86_64=1)
+    list(APPEND SOURCES_LIST
+        common/amd64/sections_arch.cpp
+        Linux/amd64/Linux_dyn_offset_arch.cpp)
+endif()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Android")
     list(APPEND SOURCES_LIST ${CMAKE_SYSTEM_NAME}/android_sections.cpp)
@@ -61,7 +70,7 @@ execute_process(
     COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/generateParse.py ${LINUX_FAMILY} ${RELEASE_VERSION} ${KERNEL_VERSION} ${CMAKE_CURRENT_SOURCE_DIR}/heuristic_list.json ${CMAKE_CURRENT_BINARY_DIR}/finddyn.h
 )
 
-add_library(${PROJECT_NAME} SHARED ${SOURCES_LIST})
-target_compile_definitions(${PROJECT_NAME} PRIVATE ${DYNOFFSET_CFLAGS})
+add_library(${PROJECT_NAME} STATIC ${SOURCES_LIST})
+target_compile_definitions(${PROJECT_NAME} PRIVATE ${DYNOFFSET_CFLAGS} ${COMP_DEFS})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_LIST})

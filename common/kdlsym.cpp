@@ -3,7 +3,6 @@
 
 #include <localUtil.h>
 #include <bgrep_e.h>
-#include <ibeSet.h>
 #include <krw_util.h>
 
 #include <kernel_block.h>
@@ -11,10 +10,11 @@
 #include <kern_static.h>
 #include <kern_dynamic.h>
 
-#if defined(DEBIAN)
-    #define kernel_symbol_t kernel_symbol_relative
-#elif defined(SARGO)
+#if defined(SARGO)
     #define kernel_symbol_t kernel_symbol
+#else
+// defined(DEBIAN)
+    #define kernel_symbol_t kernel_symbol_relative
 #endif
 
 int ksym_dlsym_kcrc(kernel_linux* kernel_local_target, const char* newString, uint64_t* out_address)

@@ -3,7 +3,6 @@
 
 #include <localUtil.h>
 #include <bgrep_e.h>
-#include <ibeSet.h>
 #include <kernel_block.h>
 #include <kern_img.h>
 #include <kern_static.h>
@@ -12,7 +11,7 @@
 int grab_task_struct_offs(kern_dynamic* kernel_local_target)
 {
     int result = -1;
-    size_t init_task = 0;
+    uint64_t init_task = 0;
     void* init_task_mapped = 0;
     size_t* memberIter = 0;
     size_t pushable_tasks = 0;
