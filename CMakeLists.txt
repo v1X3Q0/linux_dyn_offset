@@ -13,9 +13,9 @@ set(INCLUDE_LIST
     ${ANDROID_TOOL_BASE}/common/c_reginst
     ${ANDROID_TOOL_BASE}/common/kern_img/common
     ${ANDROID_TOOL_BASE}/common/kern_img/linux
-    ${ANDROID_TOOL_BASE}/linux/include
-    ${ANDROID_TOOL_BASE}/linux/helpers/tools/parseandroidkernrel/parseAndKern
-    ${ANDROID_TOOL_BASE}/linux/rwDrv/include
+    ${ANDROID_TOOL_BASE}/Linux/include
+    ${ANDROID_TOOL_BASE}/Linux/helpers/tools/parseandroidkernrel/parseAndKern
+    ${ANDROID_TOOL_BASE}/Linux/rwDrv/include
     ${CMAKE_CURRENT_BINARY_DIR}
     )
 
