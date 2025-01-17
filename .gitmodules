@@ -7,3 +7,6 @@
 [submodule "common/c_reginst"]
 	path = common/c_reginst
 	url = https://github.com/v1X3Q0/c_reginst.git
+[submodule "common/kern_img"]
+	path = common/kern_img
+	url = https://github.com/v1X3Q0/kern_img.git
