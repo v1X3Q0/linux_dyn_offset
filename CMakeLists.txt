@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(${CMAKE_SYSTEM_NAME}_dyn_offset VERSION 0.1.0)
 
+if(NOT DEFINED ANDROID_TOOL_BASE)
+    message("no ANDROID_TOOL_BASE, setting to working directory")
+    set(ANDROID_TOOL_BASE ${CMAKE_CURRENT_SOURCE_DIR})
+endif()
+
 set(DYNOFFSET_CFLAGS "")
 set(INCLUDE_LIST
     ${ANDROID_TOOL_BASE}/common/local_util
