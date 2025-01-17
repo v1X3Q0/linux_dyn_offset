@@ -13,3 +13,6 @@
 [submodule "Linux/helpers/tools/parseandroidkernrel"]
 	path = Linux/helpers/tools/parseandroidkernrel
 	url = https://github.com/v1X3Q0/parseandroidkernrel.git
+[submodule "Linux/rwDrv"]
+	path = Linux/rwDrv
+	url = https://github.com/v1X3Q0/rwDrv.git
