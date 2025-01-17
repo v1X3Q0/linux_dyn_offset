@@ -10,3 +10,6 @@
 [submodule "common/kern_img"]
 	path = common/kern_img
 	url = https://github.com/v1X3Q0/kern_img.git
+[submodule "linux/helpers/tools/parseandroidkernrel"]
+	path = linux/helpers/tools/parseandroidkernrel
+	url = https://github.com/v1X3Q0/parseandroidkernrel.git
