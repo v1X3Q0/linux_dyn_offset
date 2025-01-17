@@ -13,6 +13,7 @@ set(INCLUDE_LIST
     ${ANDROID_TOOL_BASE}/common/c_reginst
     ${ANDROID_TOOL_BASE}/common/kern_img/common
     ${ANDROID_TOOL_BASE}/common/kern_img/linux
+    ${ANDROID_TOOL_BASE}/common/krw_util/krw_util
     ${ANDROID_TOOL_BASE}/Linux/include
     ${ANDROID_TOOL_BASE}/Linux/helpers/tools/parseandroidkernrel/parseAndKern
     ${ANDROID_TOOL_BASE}/Linux/rwDrv/include
